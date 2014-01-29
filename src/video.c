@@ -4,12 +4,17 @@
 #include "include/video.h"
 #include "include/string.h"
 
-uint8_t make_color(enum vga_color fg, enum vga_color bg)
+#define WHITE_TEXT 0x07
+
+
+uint8_t 
+make_color(enum vga_color fg, enum vga_color bg)
 {
 	return fg | bg << 4;
 }
  
-uint16_t make_vgaentry(char c, uint8_t color)
+uint16_t 
+make_vgaentry(char c, uint8_t color)
 {
 	uint16_t c16 = c;
 	uint16_t color16 = color;
@@ -17,7 +22,8 @@ uint16_t make_vgaentry(char c, uint8_t color)
 }
 
  
-void terminal_initialize()
+void 
+terminal_initialize()
 {
 	terminal_row = 0;
 	terminal_column = 0;
@@ -33,18 +39,21 @@ void terminal_initialize()
 	}
 }
  
-void terminal_setcolor(uint8_t color)
+void 
+terminal_setcolor(uint8_t color)
 {
 	terminal_color = color;
 }
  
-void terminal_putentryat(char c, uint8_t color, size_t x, size_t y)
+void 
+terminal_putentryat(char c, uint8_t color, size_t x, size_t y)
 {
 	const size_t index = y * VGA_WIDTH + x;
 	terminal_buffer[index] = make_vgaentry(c, color);
 }
  
-void terminal_putchar(char c)
+void 
+terminal_putchar(char c)
 {
 	if (c == '\n')
 	{
@@ -64,9 +73,25 @@ void terminal_putchar(char c)
 	}
 }
  
-void terminal_writestring(const char* data)
+void 
+terminal_writestring(const char* data)
 {
 	size_t datalen = strlen(data);
 	for ( size_t i = 0; i < datalen; i++ )
 		terminal_putchar(data[i]);
+}
+
+void 
+cls() 
+{	
+	char *vidmem = (char *) 0xB8000;
+	unsigned int i=0;
+	
+	while(i < (80*25*2))
+	{
+		vidmem[i]=' ';
+		i++;
+		vidmem[i]=WHITE_TEXT;
+		i++;
+	};
 }

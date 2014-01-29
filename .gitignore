@@ -1,4 +1,11 @@
-# Object files
+#My ignores
+doc/
+test/
+urco.iso
+urco.bin
+
+
+#Object files
 *.o
 *.ko
 

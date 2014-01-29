@@ -5,6 +5,8 @@
 
 #include <stddef.h>
 
+#define WHITE_TEXT 0x07
+
 /* Hardware text mode color constants. */
 enum vga_color
 {
@@ -41,3 +43,4 @@ extern void terminal_setcolor(uint8_t color);
 extern void terminal_putentryat(char c, uint8_t color, size_t x, size_t y);
 extern void terminal_putchar(char c);
 extern void terminal_writestring(const char* data);
+extern void cls();
