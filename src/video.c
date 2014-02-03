@@ -1,6 +1,3 @@
-#include <stdint.h>
-#include <stddef.h>
-
 #include "include/video.h"
 #include "include/string.h"
 

@@ -4,6 +4,7 @@
 #endif
 
 #include <stddef.h>
+#include <stdint.h>
 
 #define WHITE_TEXT 0x07
 
