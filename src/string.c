@@ -1,15 +1,24 @@
 #include "include/string.h"
 
+
+/**
+* strlen - returns the length of a string
+*/
 size_t 
 strlen(const char *s)
 {
-	const char * src = s;
-	while(*s){
-		s++;
-	}
-	return s - src;
+	const char * src;
+	for (src = s; *src != '\0'; ++src)
+	/*returns the difference in bytes once
+	it finds the null byte*/
+	return src-s;
 }
 
+
+/*
+* memcpy - copies n bytes from buffer pointed by src 
+* to buffer pointed by dest.
+*/
 void *
 memcpy(void *dest, const void *src, size_t n)
 {
@@ -26,6 +35,10 @@ memcpy(void *dest, const void *src, size_t n)
 void *
 memset(void *s, int c, size_t n)
 {
-	//TODO: Code this shit up	
+	unsigned char *ret = s;
+	while (n--)
+	{
+		*(ret++) = (unsigned char)c;
+	}
+	return s;
 }
-
