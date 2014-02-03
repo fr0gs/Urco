@@ -7,6 +7,7 @@ LD = i586-elf-gcc
 BOOT_OBJ = boot.o
 KERNEL_OBJ = kernel.o
 GDT_OBJ = gdt.o
+IDT_OBJ = idt.o
 VIDEO_OBJ = video.o
 STRING_OBJ = string.o
 
@@ -20,10 +21,12 @@ all:
 	$(CC) -c video.c -std=gnu99 -ffreestanding -O2 -Wall -Wextra -o $(VIDEO_OBJ)
 	$(CC) -c string.c -std=gnu99 -ffreestanding -O2 -Wall -Wextra -o $(STRING_OBJ)
 	$(CC) -c gdt.c -std=gnu99 -ffreestanding -O2 -Wall -Wextra -o $(GDT_OBJ)
+	$(CC) -c idt.c -std=gnu99 -ffreestanding -O2 -Wall -Wextra -o $(IDT_OBJ)
 
 #Link the kernel
 	$(CC) -T linker.ld -o urco.bin -lgcc -ffreestanding -O2 -nostdlib \
-	$(BOOT_OBJ) $(KERNEL_OBJ) $(VIDEO_OBJ) $(STRING_OBJ) $(GDT_OBJ)
+	$(BOOT_OBJ) $(KERNEL_OBJ) $(VIDEO_OBJ) $(STRING_OBJ) $(GDT_OBJ) $(IDT_OBJ)
 
 clean:
-	rm $(BOOT_OBJ) $(KERNEL_OBJ) $(VIDEO_OBJ) $(STRING_OBJ) $(GDT_OBJ) urco.bin
+	rm $(BOOT_OBJ) $(KERNEL_OBJ) $(VIDEO_OBJ) $(STRING_OBJ) \
+	$(GDT_OBJ) $(IDT_OBJ) urco.bin
